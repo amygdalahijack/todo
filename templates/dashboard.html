@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body2 %}
+
+<h1>The Bucket List</h1>
+          <hr>
+          <form action="/add" method = "post">
+          <div class="form-group">
+              <label for="formGroupExampleInput"></label>
+              <input type="text" class="form-control" name = "title" id="formGroupExampleInput" placeholder="Yapılacak, alınacak, izlenecek birşey yaz.."><br>
+              <button type = "submit" class="btn btn-primary">Kayıt Gir</button>
+            </div>
+          </form>
+          <br><br>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Yapılacak</th>
+                <th scope="col">Durum</th>
+                <th scope="col">Durum Güncelle</th>
+                <th scope="col">Sil</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in todos %}
+                  <tr>
+                      
+                      <td>{{todo.title}}</td>
+                      {% if todo.complete == False %}
+                      <td>Yapılmadı</td>
+                      {% else %}
+                      <td>Yapıldı</td>
+                      {% endif %}
+                      <td><a href="/complete/{{todo.id}}" class="btn btn-primary">Güncelle</a></td>
+                      <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+                  </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+          </div>
+
+{% endblock body2 %}
